@@ -1,0 +1,31 @@
+name: Release vsix to OpenVSX
+on:
+  workflow_dispatch: {}
+
+jobs:
+  release:
+    name: "Release"
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v5
+
+    - name: Set Node.js
+      uses: actions/setup-node@v5
+
+    - name: npm install
+      run: npm install
+
+    - name: npm test
+      run: npm test
+
+    - name: Publish to Open VSX Registry
+      uses: HaaLeo/publish-vscode-extension@v2
+      id: publishToOpenVSX
+      with:
+        pat: ${{ secrets.OPEN_VSX_TOKEN }}
+
+    - name: Upload
+      uses: djn24/add-asset-to-release@v1
+      with:
+        token: ${{secrets.GITHUB_TOKEN}}
+        path: ${{ steps.publishToOpenVSX.outputs.vsixPath }}

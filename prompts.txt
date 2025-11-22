@@ -1,0 +1,73 @@
+ChatGPT history how most of extension.ts was generated.
+
+---
+create vscode extension.ts which converts the selection(s) - add a helper function to reduce code duplication
+
+      {
+        "command": "text-utils.base64-encode",
+        "title": "Base64 Encode"
+      },
+      {
+        "command": "text-utils.base64-decode",
+        "title": "Base64 Decode"
+      },
+      {
+        "command": "text-utils.json-string-encode",
+        "title": "JSON string encode"
+      },
+      {
+        "command": "text-utils.json-string-decode",
+        "title": "JSON string decode"
+      },
+      {
+        "command": "text-utils.url-component-encode",
+        "title": "URL component encode"
+      },
+      {
+        "command": "text-utils.url-component-decode",
+        "title": "URL component decode"
+      },
+      {
+        "command": "text-utils.xml-entity-encode",
+        "title": "XML entity encode"
+      },
+      {
+        "command": "text-utils.xml-entity-decode",
+        "title": "XML entity decode"
+      }
+---
+
+is the edit builder safe with replacing with different length strings?
+---
+
+extend xml entity decode to also handle &#...; as well as optional semicolon
+---
+
+add more known named entities
+---
+
+add european acented characters
+---
+
+add decode function for email/eml mime strings which can be in a lot of different encodings - start with just utf8 and simple transforms
+---
+
+can these encoded blocks span multiple lines in the eml? not covered yet
+---
+
+does nodejs buffer support these charsets?
+---
+
+add iconv fallback
+---
+
+add tests for all conversions now
+---
+
+I exported my functions from the extensions so you don't have to reimplement them in the tests, use them:
+
+base64Encode
+base64Decode
+xmlEntityEncode
+xmlEntityDecode
+mimeHeaderDecode

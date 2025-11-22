@@ -1,0 +1,83 @@
+{
+  "name": "text-utils",
+  "displayName": "text-utils",
+  "publisher": "webfreak",
+  "description": "Simple text and email decoding toolbox: Base64, XML, JSON, MIME (EML files)",
+  "license": "CC0-1.0 or Unlicense",
+  "repository": {},
+  "version": "0.1.0",
+  "engines": {
+    "vscode": "^1.100.1"
+  },
+  "categories": [
+    "Other"
+  ],
+  "capabilities": {
+    "untrustedWorkspaces": {
+      "supported": true
+    }
+  },
+  "activationEvents": [],
+  "main": "./out/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "text-utils.base64-encode",
+        "title": "Base64 Encode"
+      },
+      {
+        "command": "text-utils.base64-decode",
+        "title": "Base64 Decode"
+      },
+      {
+        "command": "text-utils.json-string-encode",
+        "title": "JSON string encode"
+      },
+      {
+        "command": "text-utils.json-string-decode",
+        "title": "JSON string decode"
+      },
+      {
+        "command": "text-utils.url-component-encode",
+        "title": "URL component encode"
+      },
+      {
+        "command": "text-utils.url-component-decode",
+        "title": "URL component decode"
+      },
+      {
+        "command": "text-utils.xml-entity-encode",
+        "title": "XML entity encode"
+      },
+      {
+        "command": "text-utils.xml-entity-decode",
+        "title": "XML entity decode"
+      },
+      {
+        "command": "text-utils.mime-header-decode",
+        "title": "MIME header decode"
+      }
+    ]
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "npm run compile && npm run lint",
+    "lint": "eslint src",
+    "test": "mocha out/test/**/*.js"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.10",
+    "@types/node": "22.x",
+    "@types/vscode": "^1.100.1",
+    "@vscode/test-cli": "^0.0.12",
+    "@vscode/test-electron": "^2.5.2",
+    "eslint": "^9.39.1",
+    "typescript": "^5.9.3",
+    "typescript-eslint": "^8.46.3"
+  },
+  "dependencies": {
+    "iconv-lite": "^0.7.0"
+  }
+}
