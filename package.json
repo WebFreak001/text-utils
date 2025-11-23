@@ -4,7 +4,9 @@
   "publisher": "webfreak",
   "description": "Simple text and email decoding toolbox: Base64, XML, JSON, MIME (EML files)",
   "license": "CC0-1.0 or Unlicense",
-  "repository": {},
+  "repository": {
+    "url": "https://github.com/WebFreak001/text-utils"
+  },
   "version": "0.1.0",
   "engines": {
     "vscode": "^1.100.1"
