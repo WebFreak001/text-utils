@@ -1,6 +1,11 @@
 # Change Log
 
-## 0.0.1
+## 0.2.0
+
+* Added **Insert UUID (v4)** command. (`text-utils.insert-uuid-v4`)
+* Added setting `textUtils.uppercaseUuids`
+
+## 0.0.1 / 0.1.0
 
 * Initial release:
 	* base64 encode

@@ -10,7 +10,7 @@ import {
 export function activate(context: vscode.ExtensionContext) {
   async function applyTransform(
     editor: vscode.TextEditor,
-    transform: (value: string, warnings?: string[]) => string
+    transform: (value: string, warnings?: string[]) => string,
   ) {
     const selections = editor.selections;
 
@@ -29,7 +29,7 @@ export function activate(context: vscode.ExtensionContext) {
           } catch (err) {
             console.error(err);
             warnings.push(
-              err instanceof Error ? err.message : "Error in conversion code"
+              err instanceof Error ? err.message : "Error in conversion code",
             );
           }
         }
@@ -39,11 +39,11 @@ export function activate(context: vscode.ExtensionContext) {
           let deduped = Array.from(new Set(warnings));
           if (deduped.length === 1) {
             vscode.window.showWarningMessage(
-              "Unable to convert: " + deduped[0]
+              "Unable to convert: " + deduped[0],
             );
           } else {
             vscode.window.showWarningMessage(
-              "Unable to convert:\n" + deduped.map((v) => "- " + v).join("\n")
+              "Unable to convert:\n" + deduped.map((v) => "- " + v).join("\n"),
             );
           }
         }
@@ -53,10 +53,12 @@ export function activate(context: vscode.ExtensionContext) {
   const register = (command: string, transform: (value: string) => string) => {
     context.subscriptions.push(
       vscode.commands.registerTextEditorCommand(command, (editor) =>
-        applyTransform(editor, transform)
-      )
+        applyTransform(editor, transform),
+      ),
     );
   };
+
+  // --- encoding & decoding functions ---
 
   register("text-utils.base64-encode", base64Encode);
   register("text-utils.base64-decode", base64Decode);
@@ -76,6 +78,27 @@ export function activate(context: vscode.ExtensionContext) {
   register("text-utils.xml-entity-encode", xmlEntityEncode);
   register("text-utils.xml-entity-decode", xmlEntityDecode);
   register("text-utils.mime-header-decode", mimeHeaderDecode);
+
+  // --- generation / insert functions ---
+
+  vscode.commands.registerTextEditorCommand(
+    "text-utils.insert-uuid-v4",
+    (editor) =>
+      editor.edit((editBuilder) => {
+        const uppercase =
+          vscode.workspace
+            .getConfiguration("text-utils", editor.document.uri)
+            .get("uppercaseUuids") ?? false;
+        for (const selection of editor.selections) {
+          editBuilder.replace(
+            selection,
+            uppercase
+              ? crypto.randomUUID().toUpperCase()
+              : crypto.randomUUID().toLowerCase(),
+          );
+        }
+      }),
+  );
 }
 
 export function deactivate() {}

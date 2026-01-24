@@ -7,7 +7,7 @@
   "repository": {
     "url": "https://github.com/WebFreak001/text-utils"
   },
-  "version": "0.1.0",
+  "version": "0.2.0",
   "engines": {
     "vscode": "^1.100.1"
   },
@@ -58,8 +58,24 @@
       {
         "command": "text-utils.mime-header-decode",
         "title": "MIME header decode"
+      },
+      {
+        "command": "text-utils.insert-uuid-v4",
+        "title": "Insert UUID (v4)"
       }
-    ]
+    ],
+    "configuration": {
+      "title": "text-utils",
+      "type": "object",
+      "properties": {
+        "textUtils.uppercaseUuids": {
+          "type": "boolean",
+          "default": false,
+          "scope": "resource",
+          "markdownDescription": "Set to `true` to generate uppercased UUIDs instead of lowercased ones"
+        }
+      }
+    }
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
